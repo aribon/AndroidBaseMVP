@@ -14,24 +14,10 @@ public abstract class BaseActivity<P extends BasePresenter> extends Activity imp
 
     protected P mPresenter;
 
-    Class<P> pClass;
-
-    protected P getInstanceOfP(Class<P> pClass) {
-        try {
-            return pClass.newInstance();
-        } catch (InstantiationException e) {
-            e.printStackTrace();
-            return null;
-        } catch (IllegalAccessException e) {
-            e.printStackTrace();
-            return null;
-        }
-    }
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        mPresenter = getInstanceOfP(pClass);
+        //TODO Instantiate P
         mPresenter.onCreate();
         mPresenter.onAttachView(this);
     }
