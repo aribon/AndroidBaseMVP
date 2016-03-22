@@ -17,7 +17,6 @@ public abstract class BaseActivity<P extends BasePresenter> extends Activity imp
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        //TODO Instantiate P
         mPresenter.onCreate();
         mPresenter.onAttachView(this);
     }
