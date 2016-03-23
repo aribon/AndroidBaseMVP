@@ -19,6 +19,7 @@ public class MainActivity extends BaseActivity<MainPresenter> {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        mPresenter.onAttachView(this);
         tvName = (TextView) findViewById(R.id.main_name);
         tvRole = (TextView) findViewById(R.id.main_role);
     }
@@ -46,6 +47,11 @@ public class MainActivity extends BaseActivity<MainPresenter> {
     @Override
     public void setPresenter(MainPresenter presenter) {
         super.setPresenter(presenter);
+    }
+
+    @Override
+    protected MainPresenter initPresenter() {
+        return new MainPresenter();
     }
 
     public void displayName(String name) {
