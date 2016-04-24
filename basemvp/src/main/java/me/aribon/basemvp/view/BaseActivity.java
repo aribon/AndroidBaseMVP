@@ -1,7 +1,7 @@
 package me.aribon.basemvp.view;
 
-import android.app.Activity;
 import android.os.Bundle;
+import android.app.Activity;
 
 import me.aribon.basemvp.presenter.BasePresenter;
 
@@ -18,7 +18,6 @@ public abstract class BaseActivity<P extends BasePresenter> extends Activity imp
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         mPresenter = initPresenter();
-        //TODO instantiate P
         mPresenter.onCreate();
         mPresenter.onAttachView(this);
     }
