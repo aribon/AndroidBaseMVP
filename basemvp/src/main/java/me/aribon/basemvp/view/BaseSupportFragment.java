@@ -10,7 +10,7 @@ import me.aribon.basemvp.presenter.BasePresenter;
  *
  * @author Anthony
  */
-public abstract class BaseSupportFragment<P extends BasePresenter> extends Fragment implements BaseView<P> {
+public abstract class BaseSupportFragment<P extends BasePresenter> extends Fragment implements BaseView {
 
     protected P mPresenter;
 
@@ -18,14 +18,26 @@ public abstract class BaseSupportFragment<P extends BasePresenter> extends Fragm
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         mPresenter = initPresenter();
-        mPresenter.onCreate();
         mPresenter.onAttachView(this);
+        mPresenter.onCreate();
     }
 
     @Override
     public void onResume() {
         super.onResume();
         mPresenter.onResume();
+    }
+
+    @Override
+    public void onStart() {
+        super.onStart();
+        mPresenter.onStart();
+    }
+
+    @Override
+    public void onStop() {
+        super.onStop();
+        mPresenter.onStop();
     }
 
     @Override
@@ -37,18 +49,7 @@ public abstract class BaseSupportFragment<P extends BasePresenter> extends Fragm
     @Override
     public void onDestroy() {
         super.onDestroy();
-    }
-
-    @Override
-    public P getPresenter() {
-        return mPresenter;
-    }
-
-    @Override
-    public void setPresenter(P presenter) {
-        this.mPresenter.onDetachView();
-        this.mPresenter = presenter;
-        this.mPresenter.onAttachView(this);
+        mPresenter.onDestroy();
     }
 
     protected abstract P initPresenter();

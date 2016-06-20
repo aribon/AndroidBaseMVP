@@ -1,7 +1,8 @@
 package me.aribon.basemvp.view;
 
-import android.os.Bundle;
 import android.app.Activity;
+import android.os.Bundle;
+import android.util.Log;
 
 import me.aribon.basemvp.presenter.BasePresenter;
 
@@ -10,7 +11,9 @@ import me.aribon.basemvp.presenter.BasePresenter;
  *
  * @author Anthony
  */
-public abstract class BaseActivity<P extends BasePresenter> extends Activity implements BaseView<P> {
+public abstract class BaseActivity<P extends BasePresenter> extends Activity implements BaseView {
+
+    private static final String TAG = BaseActivity.class.getSimpleName();
 
     protected P mPresenter;
 
@@ -18,14 +21,29 @@ public abstract class BaseActivity<P extends BasePresenter> extends Activity imp
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         mPresenter = initPresenter();
-        mPresenter.onCreate();
-        mPresenter.onAttachView(this);
+        if (mPresenter != null) {
+            mPresenter.onCreate();
+        } else {
+            Log.e(TAG, "Error onCreate: Not attached view exception. Please use the " + BasePresenter.class.getName() + "::onAttachView() method.");
+        }
     }
 
     @Override
     protected void onResume() {
         super.onResume();
         mPresenter.onResume();
+    }
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+        mPresenter.onStart();
+    }
+
+    @Override
+    protected void onStop() {
+        super.onStop();
+        mPresenter.onStop();
     }
 
     @Override
@@ -38,18 +56,6 @@ public abstract class BaseActivity<P extends BasePresenter> extends Activity imp
     protected void onDestroy() {
         super.onDestroy();
         mPresenter.onDestroy();
-    }
-
-    @Override
-    public P getPresenter() {
-        return mPresenter;
-    }
-
-    @Override
-    public void setPresenter(P presenter) {
-        this.mPresenter.onDetachView();
-        this.mPresenter = presenter;
-        this.mPresenter.onAttachView(this);
     }
 
     protected abstract P initPresenter();

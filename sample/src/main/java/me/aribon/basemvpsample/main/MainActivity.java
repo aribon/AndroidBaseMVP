@@ -40,16 +40,6 @@ public class MainActivity extends BaseActivity<MainPresenter> {
     }
 
     @Override
-    public MainPresenter getPresenter() {
-        return super.getPresenter();
-    }
-
-    @Override
-    public void setPresenter(MainPresenter presenter) {
-        super.setPresenter(presenter);
-    }
-
-    @Override
     protected MainPresenter initPresenter() {
         return new MainPresenter();
     }
