@@ -3,15 +3,15 @@ package me.aribon.basemvpsample.main;
 import android.os.Bundle;
 import android.widget.TextView;
 
-import me.aribon.basemvpsample.R;
 import me.aribon.basemvp.view.BaseActivity;
+import me.aribon.basemvpsample.R;
 
 /**
  * Created on 19/03/2016
  *
  * @author Anthony
  */
-public class MainActivity extends BaseActivity<MainPresenter> {
+public class MainActivity extends BaseActivity {
 
     private TextView tvName, tvRole;
 
@@ -19,7 +19,6 @@ public class MainActivity extends BaseActivity<MainPresenter> {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        mPresenter.onAttachView(this);
         tvName = (TextView) findViewById(R.id.main_name);
         tvRole = (TextView) findViewById(R.id.main_role);
     }

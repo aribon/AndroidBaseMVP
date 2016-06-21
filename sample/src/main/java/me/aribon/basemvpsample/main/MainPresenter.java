@@ -13,14 +13,14 @@ public class MainPresenter extends BasePresenter<MainActivity> {
     private User userModel;
 
     @Override
-    public void onCreate() {
-        super.onCreate();
-        userModel = new User();
+    public void onAttachView(MainActivity view) {
+        super.onAttachView(view);
     }
 
     @Override
-    public void onAttachView(MainActivity view) {
-        super.onAttachView(view);
+    public void onCreate() {
+        super.onCreate();
+        userModel = new User();
     }
 
     @Override

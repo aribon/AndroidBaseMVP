@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.os.Bundle;
 import android.util.Log;
 
+import me.aribon.basemvp.exception.NotAttachedViewException;
 import me.aribon.basemvp.presenter.BasePresenter;
 
 /**
@@ -11,7 +12,7 @@ import me.aribon.basemvp.presenter.BasePresenter;
  *
  * @author Anthony
  */
-public abstract class BaseActivity<P extends BasePresenter> extends Activity implements BaseView {
+public abstract class BaseActivity<P extends BasePresenter<BaseView>> extends Activity implements BaseView {
 
     private static final String TAG = BaseActivity.class.getSimpleName();
 
@@ -20,12 +21,33 @@ public abstract class BaseActivity<P extends BasePresenter> extends Activity imp
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        mPresenter = initPresenter();
-        if (mPresenter != null) {
-            mPresenter.onCreate();
-        } else {
-            Log.e(TAG, "Error onCreate: Not attached view exception. Please use the " + BasePresenter.class.getName() + "::onAttachView() method.");
+
+        try {
+            preparePresenter();
+
+        } catch (NotAttachedViewException | NullPointerException e) {
+            // TODO: 21/06/2016 Do anything
+            Log.e(TAG, e.getMessage());
+
+        } finally {
+            Log.d(TAG, "finish");
+            //TODO: 21/06/2016 Do something
         }
+    }
+
+    public void preparePresenter() throws NotAttachedViewException, NullPointerException {
+        mPresenter = initPresenter();
+
+        if (mPresenter == null)
+            throw new NullPointerException();
+
+        mPresenter.onAttachView(this);
+
+        if (!mPresenter.hasAttachedView())
+            throw new NotAttachedViewException();
+
+        mPresenter.onCreate();
+
     }
 
     @Override

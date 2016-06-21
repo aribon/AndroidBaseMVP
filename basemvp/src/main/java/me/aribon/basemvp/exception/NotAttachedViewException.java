@@ -3,7 +3,9 @@ package me.aribon.basemvp.exception;
 import me.aribon.basemvp.presenter.BasePresenter;
 
 /**
- * Created by aribon on 20/06/2016.
+ * Created on 20/06/2016
+ *
+ * @author aribon
  */
 public class NotAttachedViewException extends Exception {
 

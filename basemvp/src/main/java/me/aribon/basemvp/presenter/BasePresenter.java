@@ -42,4 +42,8 @@ public class BasePresenter<V extends BaseView> {
     public void onDetachView() {
         this.mView = null;
     }
+
+    public boolean hasAttachedView() {
+        return this.mView != null;
+    }
 }
