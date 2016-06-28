@@ -11,11 +11,11 @@ import me.aribon.basemvp.presenter.BasePresenter;
  *
  * @author Anthony
  */
-public abstract class BaseActivity<P extends BasePresenter<BaseView>> extends Activity implements BaseView<P> {
+public abstract class BaseActivity<P extends BasePresenter> extends Activity implements BaseView<P> {
 
     private static final String TAG = BaseActivity.class.getSimpleName();
 
-    protected P presenter;
+    private P presenter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -73,5 +73,10 @@ public abstract class BaseActivity<P extends BasePresenter<BaseView>> extends Ac
     protected void onDestroy() {
         super.onDestroy();
         presenter.onDestroy();
+    }
+
+    @Override
+    public P getPresenter() {
+        return presenter;
     }
 }

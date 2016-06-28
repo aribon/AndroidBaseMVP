@@ -12,7 +12,7 @@ import me.aribon.basemvp.view.BaseView;
  */
 public class BasePresenter<V extends BaseView> implements Presenter<V>, AndroidLifecycle {
 
-    protected V view;
+    private V view;
 
     @Override
     public void onAttachView(V view) {
@@ -57,5 +57,9 @@ public class BasePresenter<V extends BaseView> implements Presenter<V>, AndroidL
     @Override
     public boolean hasAttachedView() {
         return this.view != null;
+    }
+
+    protected V getView() {
+        return view;
     }
 }

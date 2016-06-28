@@ -11,4 +11,6 @@ public interface BaseView<P extends BasePresenter> extends View {
 
     P createPresenter();
 
+    P getPresenter();
+
 }

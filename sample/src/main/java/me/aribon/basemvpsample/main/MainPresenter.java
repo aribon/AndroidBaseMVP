@@ -10,12 +10,14 @@ import me.aribon.basemvp.presenter.BasePresenter;
  *
  * @author Anthony
  */
-public class MainPresenter<P extends MainActivity> extends BasePresenter<P> {
+public class MainPresenter extends BasePresenter<MainActivity> {
 
     private User userModel;
 
+    private int counter;
+
     @Override
-    public void onAttachView(P view) {
+    public void onAttachView(MainActivity view) {
         super.onAttachView(view);
     }
 
@@ -23,13 +25,15 @@ public class MainPresenter<P extends MainActivity> extends BasePresenter<P> {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         userModel = new User();
+        counter = 1;
     }
 
     @Override
     public void onResume() {
         super.onResume();
-        view.displayName(userModel.getFullname());
-        view.displayRole(userModel.getRole());
+        getView().showButton();
+        getView().displayName(userModel.getFullname());
+        getView().displayRole(userModel.getRole());
     }
 
     @Override
@@ -45,5 +49,23 @@ public class MainPresenter<P extends MainActivity> extends BasePresenter<P> {
     @Override
     public void onDestroy() {
         super.onDestroy();
+    }
+
+    public void onButtonClick() {
+
+        if (counter%10 == 0)
+            getView().hideButton();
+
+        if (getView().isNameVisible())
+            getView().hideName();
+        else
+            getView().showName();
+
+        if (getView().isRoleVisible())
+            getView().hideRole();
+        else
+            getView().showRole();
+
+        counter++;
     }
 }
