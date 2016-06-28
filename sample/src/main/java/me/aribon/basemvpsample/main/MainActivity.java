@@ -38,16 +38,16 @@ public class MainActivity extends BaseActivity {
         super.onDestroy();
     }
 
-    @Override
-    protected MainPresenter initPresenter() {
-        return new MainPresenter();
-    }
-
     public void displayName(String name) {
         tvName.setText(name);
     }
 
     public void displayRole(String role) {
         tvRole.setText(role);
+    }
+
+    @Override
+    public MainPresenter createPresenter() {
+        return new MainPresenter();
     }
 }

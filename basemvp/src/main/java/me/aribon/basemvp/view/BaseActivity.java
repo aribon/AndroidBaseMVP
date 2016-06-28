@@ -4,7 +4,6 @@ import android.app.Activity;
 import android.os.Bundle;
 import android.util.Log;
 
-import me.aribon.basemvp.exception.NotAttachedViewException;
 import me.aribon.basemvp.presenter.BasePresenter;
 
 /**
@@ -12,73 +11,67 @@ import me.aribon.basemvp.presenter.BasePresenter;
  *
  * @author Anthony
  */
-public abstract class BaseActivity<P extends BasePresenter<BaseView>> extends Activity implements BaseView {
+public abstract class BaseActivity<P extends BasePresenter<BaseView>> extends Activity implements BaseView<P> {
 
     private static final String TAG = BaseActivity.class.getSimpleName();
 
-    protected P mPresenter;
+    protected P presenter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        presenter = createPresenter();
+        presenter.onAttachView(this);
 
-        try {
-            preparePresenter();
-
-        } catch (NotAttachedViewException | NullPointerException e) {
-            // TODO: 21/06/2016 Do anything
-            Log.e(TAG, e.getMessage());
-
-        } finally {
-            Log.d(TAG, "finish");
-            //TODO: 21/06/2016 Do something
-        }
+        //TODO Verification to improve
+        if (presenter.hasAttachedView())
+            presenter.onCreate(savedInstanceState);
+        else
+            Log.e(TAG, "onCreate: NotAttachedView. Please call Presenter::onAttachView()");
     }
 
-    public void preparePresenter() throws NotAttachedViewException, NullPointerException {
-        mPresenter = initPresenter();
-
-        if (mPresenter == null)
-            throw new NullPointerException();
-
-        mPresenter.onAttachView(this);
-
-        if (!mPresenter.hasAttachedView())
-            throw new NotAttachedViewException();
-
-        mPresenter.onCreate();
-
-    }
+//    public void createPresenter() {
+//        presenter = initPresenter();
+//
+//        if (presenter == null)
+//            throw new NullPointerException();
+//
+//
+//
+////        if (!presenter.hasAttachedView())
+////            throw new NotAttachedViewException();
+//
+//        presenter.onCreate();
+//
+//    }
 
     @Override
     protected void onResume() {
         super.onResume();
-        mPresenter.onResume();
+        presenter.onResume();
     }
 
     @Override
     protected void onStart() {
         super.onStart();
-        mPresenter.onStart();
+        presenter.onStart();
     }
 
     @Override
     protected void onStop() {
         super.onStop();
-        mPresenter.onStop();
+        presenter.onStop();
     }
 
     @Override
     protected void onPause() {
         super.onPause();
-        mPresenter.onPause();
+        presenter.onPause();
     }
 
     @Override
     protected void onDestroy() {
         super.onDestroy();
-        mPresenter.onDestroy();
+        presenter.onDestroy();
     }
-
-    protected abstract P initPresenter();
 }

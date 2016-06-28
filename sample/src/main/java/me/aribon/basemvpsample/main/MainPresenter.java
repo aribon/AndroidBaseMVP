@@ -1,5 +1,7 @@
 package me.aribon.basemvpsample.main;
 
+import android.os.Bundle;
+
 import me.aribon.basemvpsample.model.User;
 import me.aribon.basemvp.presenter.BasePresenter;
 
@@ -8,26 +10,26 @@ import me.aribon.basemvp.presenter.BasePresenter;
  *
  * @author Anthony
  */
-public class MainPresenter extends BasePresenter<MainActivity> {
+public class MainPresenter<P extends MainActivity> extends BasePresenter<P> {
 
     private User userModel;
 
     @Override
-    public void onAttachView(MainActivity view) {
+    public void onAttachView(P view) {
         super.onAttachView(view);
     }
 
     @Override
-    public void onCreate() {
-        super.onCreate();
+    public void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
         userModel = new User();
     }
 
     @Override
     public void onResume() {
         super.onResume();
-        mView.displayName(userModel.getFullname());
-        mView.displayRole(userModel.getRole());
+        view.displayName(userModel.getFullname());
+        view.displayRole(userModel.getRole());
     }
 
     @Override
