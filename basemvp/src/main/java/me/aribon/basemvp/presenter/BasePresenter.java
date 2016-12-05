@@ -1,6 +1,6 @@
 package me.aribon.basemvp.presenter;
 
-import android.os.Bundle;
+import android.support.annotation.CallSuper;
 
 import me.aribon.basemvp.AndroidLifecycle;
 import me.aribon.basemvp.view.BaseView;
@@ -14,13 +14,14 @@ public class BasePresenter<V extends BaseView> implements Presenter<V>, AndroidL
 
     private V view;
 
+    @CallSuper
     @Override
     public void onAttachView(V view) {
         this.view = view;
     }
 
     @Override
-    public void onCreate(Bundle savedInstanceState) {
+    public void onCreate() {
 
     }
 
@@ -44,11 +45,13 @@ public class BasePresenter<V extends BaseView> implements Presenter<V>, AndroidL
 
     }
 
+    @CallSuper
     @Override
     public void onDestroy() {
         onDetachView();
     }
 
+    @CallSuper
     @Override
     public void onDetachView() {
         this.view = null;
@@ -59,7 +62,8 @@ public class BasePresenter<V extends BaseView> implements Presenter<V>, AndroidL
         return this.view != null;
     }
 
-    protected V getView() {
+    public V getView() {
         return view;
     }
+
 }

@@ -2,7 +2,9 @@ package me.aribon.basemvp.view;
 
 import android.app.Fragment;
 import android.os.Bundle;
+import android.support.annotation.Nullable;
 
+import me.aribon.basemvp.exeption.NotAttachedViewException;
 import me.aribon.basemvp.presenter.BasePresenter;
 
 /**
@@ -10,46 +12,25 @@ import me.aribon.basemvp.presenter.BasePresenter;
  *
  * @author Anthony
  */
-public abstract class BaseFragment<P extends BasePresenter<BaseView>> extends Fragment implements BaseView<P> {
+public abstract class BaseFragment<P extends BasePresenter> extends Fragment implements BaseView<P> {
 
     private static final String TAG = BaseFragment.class.getSimpleName();
 
     protected P mPresenter;
 
     @Override
-    public void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
+    public void onActivityCreated(@Nullable Bundle savedInstanceState) {
+        super.onActivityCreated(savedInstanceState);
         mPresenter = createPresenter();
         mPresenter.onAttachView(this);
-        mPresenter.onCreate(savedInstanceState);
+        mPresenter.onCreate();
 
-//        try {
-//            createPresenter();
-//
-//        } catch (NotAttachedViewException | NullPointerException e) {
-//            // TODO: 21/06/2016 Do anything
-//            Log.e(TAG, e.getMessage());
-//
-//        } finally {
-//            Log.d(TAG, "finish");
-//            //TODO: 21/06/2016 Do something
-//        }
+        if (mPresenter.hasAttachedView())
+            mPresenter.onCreate();
+        else {
+            throw new NotAttachedViewException("onCreate: no view has attached. Please call Presenter::onAttachView()");
+        }
     }
-
-//    public void createPresenter() throws NotAttachedViewException, NullPointerException {
-//        presenter = initPresenter();
-//
-//        if (presenter == null)
-//            throw new NullPointerException();
-//
-//        presenter.onAttachView(this);
-//
-//        if (!presenter.hasAttachedView())
-//            throw new NotAttachedViewException();
-//
-//        presenter.onCreate();
-//
-//    }
 
     @Override
     public void onResume() {
@@ -80,4 +61,10 @@ public abstract class BaseFragment<P extends BasePresenter<BaseView>> extends Fr
         super.onDestroy();
         mPresenter.onDestroy();
     }
+
+    @Override
+    public P getPresenter() {
+        return mPresenter;
+    }
+
 }

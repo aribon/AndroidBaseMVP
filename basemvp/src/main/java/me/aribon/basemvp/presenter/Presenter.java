@@ -8,7 +8,7 @@ import me.aribon.basemvp.view.View;
  *
  * @author aribon
  */
-public interface Presenter<V extends View> {
+interface Presenter<V extends View> {
 
     void onAttachView(V view);
 

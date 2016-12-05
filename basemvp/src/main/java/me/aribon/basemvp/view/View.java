@@ -6,4 +6,5 @@ package me.aribon.basemvp.view;
  * @author aribon
  */
 public interface View {
+
 }

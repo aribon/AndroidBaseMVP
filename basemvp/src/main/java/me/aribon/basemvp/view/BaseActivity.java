@@ -2,8 +2,8 @@ package me.aribon.basemvp.view;
 
 import android.app.Activity;
 import android.os.Bundle;
-import android.util.Log;
 
+import me.aribon.basemvp.exeption.NotAttachedViewException;
 import me.aribon.basemvp.presenter.BasePresenter;
 
 /**
@@ -15,68 +15,54 @@ public abstract class BaseActivity<P extends BasePresenter> extends Activity imp
 
     private static final String TAG = BaseActivity.class.getSimpleName();
 
-    private P presenter;
+    private P mPresenter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        presenter = createPresenter();
-        presenter.onAttachView(this);
+        mPresenter = createPresenter();
+        mPresenter.onAttachView(this);
 
-        //TODO Verification to improve
-        if (presenter.hasAttachedView())
-            presenter.onCreate(savedInstanceState);
-        else
-            Log.e(TAG, "onCreate: NotAttachedView. Please call Presenter::onAttachView()");
+        if (mPresenter.hasAttachedView())
+            mPresenter.onCreate();
+        else {
+            throw new NotAttachedViewException("onCreate: no view has attached. Please call Presenter::onAttachView()");
+        }
     }
-
-//    public void createPresenter() {
-//        presenter = initPresenter();
-//
-//        if (presenter == null)
-//            throw new NullPointerException();
-//
-//
-//
-////        if (!presenter.hasAttachedView())
-////            throw new NotAttachedViewException();
-//
-//        presenter.onCreate();
-//
-//    }
 
     @Override
     protected void onResume() {
         super.onResume();
-        presenter.onResume();
+        mPresenter.onResume();
     }
 
     @Override
     protected void onStart() {
         super.onStart();
-        presenter.onStart();
+        mPresenter.onStart();
     }
 
     @Override
     protected void onStop() {
         super.onStop();
-        presenter.onStop();
+        mPresenter.onStop();
     }
 
     @Override
     protected void onPause() {
         super.onPause();
-        presenter.onPause();
+        mPresenter.onPause();
     }
 
     @Override
     protected void onDestroy() {
         super.onDestroy();
-        presenter.onDestroy();
+        mPresenter.onDestroy();
     }
 
     @Override
     public P getPresenter() {
-        return presenter;
+        return mPresenter;
     }
+
 }

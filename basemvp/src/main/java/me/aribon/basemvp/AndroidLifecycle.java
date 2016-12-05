@@ -1,7 +1,5 @@
 package me.aribon.basemvp;
 
-import android.os.Bundle;
-
 /**
  * Created on 27/06/2016
  *
@@ -9,7 +7,7 @@ import android.os.Bundle;
  */
 public interface AndroidLifecycle {
 
-    void onCreate(Bundle savedInstanceState);
+    void onCreate();
 
     void onResume();
 
