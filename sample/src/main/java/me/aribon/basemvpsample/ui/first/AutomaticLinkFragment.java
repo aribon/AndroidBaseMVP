@@ -47,11 +47,6 @@ public class AutomaticLinkFragment extends BaseSupportFragment<AutomaticLinkPres
         });
     }
 
-    @Override
-    public AutomaticLinkPresenter createPresenter() {
-        return new AutomaticLinkPresenter();
-    }
-
     public void displayName(String name) {
         tvName.setText(name);
     }

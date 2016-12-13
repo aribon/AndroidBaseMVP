@@ -4,6 +4,8 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 
+import java.lang.reflect.ParameterizedType;
+
 import me.aribon.basemvp.exeption.NotAttachedViewException;
 import me.aribon.basemvp.presenter.BasePresenter;
 
@@ -21,14 +23,21 @@ public abstract class BaseSupportFragment<P extends BasePresenter> extends Fragm
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
-        mPresenter = createPresenter();
-        mPresenter.onAttachView(this);
-        mPresenter.onCreate();
 
-        if (mPresenter.hasAttachedView())
-            mPresenter.onCreate();
-        else {
-            throw new NotAttachedViewException("onCreate: no view has attached. Please call Presenter::onAttachView()");
+        Class<P> persistentClass = (Class<P>) ((ParameterizedType) getClass()
+                .getGenericSuperclass()).getActualTypeArguments()[0];
+        try {
+            mPresenter = persistentClass.newInstance();
+
+            mPresenter.onAttachView(this);
+
+            if (mPresenter.hasAttachedView())
+                mPresenter.onCreate();
+            else {
+                throw new NotAttachedViewException("onCreate: no view has attached. Please call Presenter::onAttachView()");
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
         }
     }
 

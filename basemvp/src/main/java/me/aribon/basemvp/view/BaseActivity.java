@@ -3,6 +3,8 @@ package me.aribon.basemvp.view;
 import android.app.Activity;
 import android.os.Bundle;
 
+import java.lang.reflect.ParameterizedType;
+
 import me.aribon.basemvp.exeption.NotAttachedViewException;
 import me.aribon.basemvp.presenter.BasePresenter;
 
@@ -20,13 +22,21 @@ public abstract class BaseActivity<P extends BasePresenter> extends Activity imp
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        mPresenter = createPresenter();
-        mPresenter.onAttachView(this);
 
-        if (mPresenter.hasAttachedView())
-            mPresenter.onCreate();
-        else {
-            throw new NotAttachedViewException("onCreate: no view has attached. Please call Presenter::onAttachView()");
+        Class<P> persistentClass = (Class<P>) ((ParameterizedType) getClass()
+                .getGenericSuperclass()).getActualTypeArguments()[0];
+        try {
+            mPresenter = persistentClass.newInstance();
+
+            mPresenter.onAttachView(this);
+
+            if (mPresenter.hasAttachedView())
+                mPresenter.onCreate();
+            else {
+                throw new NotAttachedViewException("onCreate: no view has attached. Please call Presenter::onAttachView()");
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
         }
     }
 

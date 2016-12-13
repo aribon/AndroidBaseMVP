@@ -9,8 +9,6 @@ import me.aribon.basemvp.presenter.BasePresenter;
  */
 public interface BaseView<P extends BasePresenter> extends View {
 
-    P createPresenter();
-
     P getPresenter();
 
 }

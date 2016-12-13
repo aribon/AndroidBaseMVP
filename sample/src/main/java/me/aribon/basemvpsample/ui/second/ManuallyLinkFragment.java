@@ -24,7 +24,7 @@ public class ManuallyLinkFragment extends Fragment implements ManuallyLinkView {
 
     public ManuallyLinkFragment() {
         //Manually presenter creation
-        presenter = createPresenter();
+        presenter = new ManuallyLinkPresenter();
     }
 
     @Override
@@ -57,11 +57,6 @@ public class ManuallyLinkFragment extends Fragment implements ManuallyLinkView {
         //Manually view link
         presenter.onAttachView(this);
         presenter.onCreate();
-    }
-
-    @Override
-    public ManuallyLinkPresenter createPresenter() {
-        return new ManuallyLinkPresenter();
     }
 
     @Override

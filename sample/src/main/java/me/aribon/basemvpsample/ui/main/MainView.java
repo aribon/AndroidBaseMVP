@@ -9,4 +9,5 @@ import me.aribon.basemvp.view.BaseView;
  */
 public interface  MainView extends BaseView<MainPresenter> {
 
+    void setMainText();
 }

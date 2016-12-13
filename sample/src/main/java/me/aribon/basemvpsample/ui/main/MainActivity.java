@@ -2,8 +2,11 @@ package me.aribon.basemvpsample.ui.main;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;
-import android.support.v7.app.AppCompatActivity;
+import android.view.View;
+import android.widget.Button;
+import android.widget.TextView;
 
+import me.aribon.basemvp.view.BaseActivity;
 import me.aribon.basemvpsample.R;
 
 /**
@@ -11,23 +14,37 @@ import me.aribon.basemvpsample.R;
  *
  * @author Anthony
  */
-public class MainActivity extends AppCompatActivity implements MainView {
+public class MainActivity extends BaseActivity<MainPresenter> {
 
-    MainPresenter presenter;
+    private static final String TAG = MainActivity.class.getSimpleName();
+
+    private TextView mainText;
+    private Button mainBtn;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        mainText = (TextView) findViewById(R.id.main_text);
+        mainBtn = (Button) findViewById(R.id.main_btn);
+
+        mainBtn.setOnClickListener(
+                new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        getPresenter().showHello();
+                    }
+                }
+        );
     }
 
-    @Override
-    public MainPresenter createPresenter() {
-        return new MainPresenter();
+    public String getMainText() {
+        return mainText.getText().toString();
     }
 
-    @Override
-    public MainPresenter getPresenter() {
-        return presenter;
+    public void setMainText(String mainText) {
+        this.mainText.setText(mainText);
     }
+
 }
