@@ -1,29 +1,76 @@
 # AndroidBaseMVP
 TODO: Write a project description
 
-## Installation
-TODO: Describe the installation process
-
 ## Usage
 
 ### Manually instantiation
 TODO: Write usage instructions
 
+1. Create your custom view extending `BaseView`
+
+	```java
+	interface CustomView extends BaseView {
+		...	
+	}
+	```
+	
+2. Create your custom `Presenter` extending `BasePresenter`
+
+	```java
+	public class CustomPresenter extends BasePresenter<CustomView> {
+		...
+	}
+	```
+	
+3. Finally create your Activity/Fragment implementing your `CustomView`
+
+	```java
+	public class CustomFragment extends Fragment implements CustomView {
+	
+		private CustomPresenter presenter;
+		...
+		
+		@Override
+    	protected void onCreate(@Nullable Bundle savedInstanceState) {
+			super.onActivityCreated(savedInstanceState);
+			...
+			presenter = new ManuallyLinkPresenter();
+        	presenter.onAttachView(this);	
+		}
+		
+		...
+		
+		@Override
+    	public void onDestroy() {
+			presenter.onDestroy();
+			super.onDestroy();
+		}
+	}
+	```
+
 ### Automatic instantiation
 TODO: Write usage instructions
 
-## Contributing
-1. Fork it!
-2. Create your feature branch: `git checkout -b my-new-feature`
-3. Commit your changes: `git commit -am 'Add some feature'`
-4. Push to the branch: `git push origin my-new-feature`
-5. Submit a pull request :D
+1. Create your custom view extending `BaseView`
 
-## History
-TODO: Write history
+	```java
+	interface CustomView extends BaseView {
+		...	
+	}
+	```
+	
+2. Create your custom `Presenter` extending `BasePresenter`
 
-## Credits
-TODO: Write credits
+	```java
+	public class CustomPresenter extends BasePresenter<CustomView> {
+		...
+	}
+	```
+	
+3. Finally create your Activity/Fragment extending `BaseActivity`, `BaseFragment` or `BaseSupportFragment`
 
-## License
-TODO: Write license
+	```java
+	public class CustomActivity extends Fragment extends BaseActivity<CustomPresenter> {
+		...
+	}
+	```
