@@ -7,7 +7,7 @@ import me.aribon.basemvp.view.BaseView;
  *
  * @author aribon
  */
-public interface  MainView extends BaseView<MainPresenter> {
+public interface MainView extends BaseView {
 
-    void setMainText();
+    void setMainText(String text);
 }

@@ -14,7 +14,7 @@ import me.aribon.basemvpsample.R;
  *
  * @author Anthony
  */
-public class MainActivity extends BaseActivity<MainPresenter> {
+public class MainActivity extends BaseActivity<MainPresenter> implements MainView {
 
     private static final String TAG = MainActivity.class.getSimpleName();
 
@@ -39,10 +39,7 @@ public class MainActivity extends BaseActivity<MainPresenter> {
         );
     }
 
-    public String getMainText() {
-        return mainText.getText().toString();
-    }
-
+    @Override
     public void setMainText(String mainText) {
         this.mainText.setText(mainText);
     }

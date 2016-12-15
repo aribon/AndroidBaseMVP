@@ -7,7 +7,7 @@ import me.aribon.basemvp.view.BaseView;
  * Created by aribon from Insign Mobility
  * on 28/11/2016
  */
-interface ManuallyLinkView extends BaseView<ManuallyLinkPresenter> {
+interface ManuallyLinkView extends BaseView {
 
     void displayName(String name);
 

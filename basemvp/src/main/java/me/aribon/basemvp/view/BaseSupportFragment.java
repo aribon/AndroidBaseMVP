@@ -14,7 +14,7 @@ import me.aribon.basemvp.presenter.BasePresenter;
  *
  * @author Anthony
  */
-public abstract class BaseSupportFragment<P extends BasePresenter> extends Fragment implements BaseView<P> {
+public abstract class BaseSupportFragment<P extends BasePresenter> extends Fragment implements BaseView {
 
     private static final String TAG = BaseSupportFragment.class.getSimpleName();
 
@@ -71,7 +71,6 @@ public abstract class BaseSupportFragment<P extends BasePresenter> extends Fragm
         mPresenter.onDestroy();
     }
 
-    @Override
     public P getPresenter() {
         return mPresenter;
     }

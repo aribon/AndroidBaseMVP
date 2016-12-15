@@ -7,7 +7,7 @@ import me.aribon.basemvp.presenter.BasePresenter;
  *
  * @author Anthony
  */
-public class MainPresenter extends BasePresenter<MainActivity> {
+public class MainPresenter extends BasePresenter<MainView> {
 
     public void showHello() {
         getView().setMainText("Hello");

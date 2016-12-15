@@ -13,7 +13,7 @@ import me.aribon.basemvp.presenter.BasePresenter;
  *
  * @author Anthony
  */
-public abstract class BaseActivity<P extends BasePresenter> extends Activity implements BaseView<P> {
+public abstract class BaseActivity<P extends BasePresenter> extends Activity implements BaseView {
 
     private static final String TAG = BaseActivity.class.getSimpleName();
 
@@ -23,10 +23,11 @@ public abstract class BaseActivity<P extends BasePresenter> extends Activity imp
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        Class<P> persistentClass = (Class<P>) ((ParameterizedType) getClass()
+        Class<P> presenterClass = (Class<P>) ((ParameterizedType) getClass()
                 .getGenericSuperclass()).getActualTypeArguments()[0];
+
         try {
-            mPresenter = persistentClass.newInstance();
+            mPresenter = presenterClass.newInstance();
 
             mPresenter.onAttachView(this);
 
@@ -70,7 +71,6 @@ public abstract class BaseActivity<P extends BasePresenter> extends Activity imp
         mPresenter.onDestroy();
     }
 
-    @Override
     public P getPresenter() {
         return mPresenter;
     }

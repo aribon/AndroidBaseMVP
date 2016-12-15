@@ -1,6 +1,7 @@
 package me.aribon.basemvpsample.ui.second;
 
 
+import android.content.Context;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -28,6 +29,13 @@ public class ManuallyLinkFragment extends Fragment implements ManuallyLinkView {
     }
 
     @Override
+    public void onAttach(Context context) {
+        super.onAttach(context);
+        presenter = new ManuallyLinkPresenter();
+        presenter.onAttachView(this);
+    }
+
+    @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
 
@@ -45,7 +53,7 @@ public class ManuallyLinkFragment extends Fragment implements ManuallyLinkView {
         button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                getPresenter().onButtonClick();
+                presenter.onButtonClick();
             }
         });
     }
@@ -60,8 +68,15 @@ public class ManuallyLinkFragment extends Fragment implements ManuallyLinkView {
     }
 
     @Override
-    public ManuallyLinkPresenter getPresenter() {
-        return this.presenter;
+    public void onDetach() {
+        presenter.onDetachView();
+        super.onDetach();
+    }
+
+    @Override
+    public void onDestroy() {
+        presenter.onDestroy();
+        super.onDestroy();
     }
 
     @Override
