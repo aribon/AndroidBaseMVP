@@ -10,20 +10,16 @@ import me.aribon.basemvpsample.model.User;
  */
 class ManuallyLinkPresenter extends BasePresenter<ManuallyLinkView> {
 
-    private User userModel;
+  private User userModel;
 
-//    SecondPresenter() {
-//        userModel = new User();
-//    }
+  @Override
+  public void onCreate() {
+    super.onCreate();
+    userModel = new User();
+  }
 
-    @Override
-    public void onCreate() {
-        super.onCreate();
-        userModel = new User();
-    }
-
-    void onButtonClick() {
-        getView().displayName(userModel.getFullname());
-        getView().displayRole(userModel.getRole());
-    }
+  void onButtonClick() {
+    getView().displayName(userModel.getFullname());
+    getView().displayRole(userModel.getRole());
+  }
 }

@@ -1,4 +1,4 @@
-package me.aribon.basemvp.exeption;
+package me.aribon.basemvp.utils.exeption;
 
 /**
  * Created by aribon from Insign Mobility

@@ -2,10 +2,11 @@ package me.aribon.basemvp.view;
 
 import android.app.Activity;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 
 import java.lang.reflect.ParameterizedType;
 
-import me.aribon.basemvp.exeption.NotAttachedViewException;
+import me.aribon.basemvp.utils.exeption.NotAttachedViewException;
 import me.aribon.basemvp.presenter.BasePresenter;
 
 /**
@@ -13,7 +14,7 @@ import me.aribon.basemvp.presenter.BasePresenter;
  *
  * @author Anthony
  */
-public abstract class BaseActivity<P extends BasePresenter> extends Activity implements BaseView {
+public abstract class BaseActivity<P extends BasePresenter> extends AppCompatActivity implements BaseView {
 
     private static final String TAG = BaseActivity.class.getSimpleName();
 

@@ -23,5 +23,4 @@ class AutomaticLinkPresenter extends BasePresenter<AutomaticLinkFragment> {
         getView().displayName(userModel.getFullname());
         getView().displayRole(userModel.getRole());
     }
-
 }

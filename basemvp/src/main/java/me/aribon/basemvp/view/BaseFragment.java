@@ -6,7 +6,7 @@ import android.support.annotation.Nullable;
 
 import java.lang.reflect.ParameterizedType;
 
-import me.aribon.basemvp.exeption.NotAttachedViewException;
+import me.aribon.basemvp.utils.exeption.NotAttachedViewException;
 import me.aribon.basemvp.presenter.BasePresenter;
 
 /**
