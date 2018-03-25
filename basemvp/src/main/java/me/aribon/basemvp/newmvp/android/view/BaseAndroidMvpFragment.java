@@ -4,6 +4,7 @@ import android.content.Context;
 
 import me.aribon.basemvp.newmvp.android.base.BaseFragment;
 import me.aribon.basemvp.newmvp.android.presenter.AndroidMvpPresenter;
+import me.aribon.basemvp.utils.exeption.PresenterInitializationException;
 
 /**
  * @Author: aribon
@@ -28,6 +29,14 @@ public abstract class BaseAndroidMvpFragment<P extends AndroidMvpPresenter> exte
   @Override
   public void onAttach(Context context) {
     super.onAttach(context);
+    initializePresenter();
+    checkIfPresenterInitialized();
+  }
+
+  private void checkIfPresenterInitialized() {
+    if (mPresenter == null) {
+      throw new PresenterInitializationException();
+    }
   }
 
   @Override

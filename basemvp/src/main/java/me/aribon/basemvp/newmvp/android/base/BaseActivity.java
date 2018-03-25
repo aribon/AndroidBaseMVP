@@ -16,7 +16,6 @@ public abstract class BaseActivity extends AppCompatActivity {
       super.onCreate(savedInstanceState);
       setContentView(getLayoutResource());
       findView();
-      initializePresenter();
       initializeData();
       initializeView();
     }
@@ -24,10 +23,6 @@ public abstract class BaseActivity extends AppCompatActivity {
     public abstract int getLayoutResource();
 
     public void findView() {
-
-    }
-
-    public void initializePresenter() {
 
     }
 
