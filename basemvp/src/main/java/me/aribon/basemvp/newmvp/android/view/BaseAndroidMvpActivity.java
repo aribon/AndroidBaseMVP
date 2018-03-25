@@ -5,6 +5,7 @@ import android.support.annotation.Nullable;
 
 import me.aribon.basemvp.newmvp.android.base.BaseActivity;
 import me.aribon.basemvp.newmvp.android.presenter.AndroidMvpPresenter;
+import me.aribon.basemvp.utils.exeption.PresenterInitializationException;
 
 /**
  * @Author: aribon
@@ -28,7 +29,19 @@ public abstract class BaseAndroidMvpActivity<P extends AndroidMvpPresenter> exte
 
   @Override
   public void onCreate(@Nullable Bundle savedInstanceState) {
+    initializePresenter();
+    checkIfPresenterInitialized();
     super.onCreate(savedInstanceState);
+  }
+
+  public void initializePresenter() {
+
+  }
+
+  private void checkIfPresenterInitialized() {
+    if (mPresenter == null) {
+      throw new PresenterInitializationException();
+    }
   }
 
   @Override
