@@ -1,6 +1,6 @@
 package me.aribon.basemvpsample.ui.main;
 
-import me.aribon.basemvp.presenter.BasePresenter;
+import me.aribon.basemvp.v1.presenter.BasePresenter;
 
 /**
  * Created on 19/03/2016

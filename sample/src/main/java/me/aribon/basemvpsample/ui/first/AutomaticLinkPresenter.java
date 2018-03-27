@@ -1,6 +1,6 @@
 package me.aribon.basemvpsample.ui.first;
 
-import me.aribon.basemvp.presenter.BasePresenter;
+import me.aribon.basemvp.v1.presenter.BasePresenter;
 import me.aribon.basemvpsample.model.User;
 
 
@@ -19,9 +19,11 @@ class AutomaticLinkPresenter extends BasePresenter<AutomaticLinkFragment> {
     }
 
     void onButtonClick() {
-
         getView().displayName(userModel.getFullname());
         getView().displayRole(userModel.getRole());
     }
 
+    void foo() {
+
+    }
 }

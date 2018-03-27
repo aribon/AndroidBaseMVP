@@ -10,7 +10,7 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.TextView;
 
-import me.aribon.basemvp.view.BaseSupportFragment;
+import me.aribon.basemvp.v1.view.BaseSupportFragment;
 import me.aribon.basemvpsample.R;
 
 /**
@@ -45,6 +45,7 @@ public class AutomaticLinkFragment extends BaseSupportFragment<AutomaticLinkPres
                 getPresenter().onButtonClick();
             }
         });
+        getPresenter().foo();
     }
 
     public void displayName(String name) {

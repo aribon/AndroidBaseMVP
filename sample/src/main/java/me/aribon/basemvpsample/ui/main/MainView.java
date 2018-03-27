@@ -1,6 +1,6 @@
 package me.aribon.basemvpsample.ui.main;
 
-import me.aribon.basemvp.view.BaseView;
+import me.aribon.basemvp.v1.view.BaseView;
 
 /**
  * Created on 28/06/2016

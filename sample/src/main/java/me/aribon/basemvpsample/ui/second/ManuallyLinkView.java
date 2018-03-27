@@ -1,6 +1,6 @@
 package me.aribon.basemvpsample.ui.second;
 
-import me.aribon.basemvp.view.BaseView;
+import me.aribon.basemvp.v1.view.BaseView;
 
 
 /**
