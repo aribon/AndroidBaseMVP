@@ -29,9 +29,9 @@ public abstract class BaseAndroidMvpActivity<P extends AndroidMvpPresenter> exte
 
   @Override
   public void onCreate(@Nullable Bundle savedInstanceState) {
+    super.onCreate(savedInstanceState);
     initializePresenter();
     checkIfPresenterInitialized();
-    super.onCreate(savedInstanceState);
   }
 
   public void initializePresenter() {

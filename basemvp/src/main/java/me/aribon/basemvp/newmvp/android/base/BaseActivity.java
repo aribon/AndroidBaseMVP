@@ -15,12 +15,17 @@ public abstract class BaseActivity extends AppCompatActivity {
     protected void onCreate(@Nullable Bundle savedInstanceState) {
       super.onCreate(savedInstanceState);
       setContentView(getLayoutResource());
-      findView();
-      initializeData();
-      initializeView();
     }
 
-    public abstract int getLayoutResource();
+  @Override
+  protected void onPostCreate(@Nullable Bundle savedInstanceState) {
+    super.onPostCreate(savedInstanceState);
+    findView();
+    initializeData();
+    initializeView();
+  }
+
+  public abstract int getLayoutResource();
 
     public void findView() {
 

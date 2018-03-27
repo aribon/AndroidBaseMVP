@@ -24,9 +24,9 @@ public class NewMvpFragment extends BaseAndroidMvpFragment<NewContract.Presenter
   public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
     super.onViewCreated(view, savedInstanceState);
 
-    tvName = (TextView) view.findViewById(R.id.second_name);
-    tvRole = (TextView) view.findViewById(R.id.second_role);
-    button = (Button) view.findViewById(R.id.second_button);
+    tvName = view.findViewById(R.id.second_name);
+    tvRole = view.findViewById(R.id.second_role);
+    button = view.findViewById(R.id.second_button);
 
     button.setOnClickListener(new View.OnClickListener() {
       @Override
