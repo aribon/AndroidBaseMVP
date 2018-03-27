@@ -30,10 +30,6 @@ public abstract class BaseFragment extends Fragment {
 
   }
 
-  public void initializePresenter() {
-
-  }
-
   public void initializeData() {
 
   }
